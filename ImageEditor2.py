@@ -64,7 +64,7 @@ class ImageEditor:
         self.is_maximized = False
 
     def minimize_window(self):
-        self.root.iconify()
+        self.root.withdraw()  # Hide the window
 
     def toggle_maximize(self):
         if self.is_maximized:

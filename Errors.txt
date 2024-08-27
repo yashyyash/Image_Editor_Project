@@ -1,0 +1,4 @@
+Error you're encountering is due to the overrideredirect(True) flag, which removes the default window decorations (like the title bar) and prevents the window from being minimized using the iconify() method.
+
+To resolve this, you'll need to manually implement the minimize functionality. One way to achieve this is by hiding the window using the withdraw() method and then restoring it with the deiconify() method when the user clicks the app's icon in the taskbar.
+
