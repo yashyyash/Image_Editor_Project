@@ -83,6 +83,7 @@ class ImageEditor:
             self.image = Image.open(file_path)
             self.img_draw = ImageDraw.Draw(self.image)
             self.update_canvas()
+            
 
     def save_image(self):
         file_path = filedialog.asksaveasfilename(defaultextension=".png")
@@ -95,6 +96,7 @@ class ImageEditor:
 
     def select_brush(self):
         self.tool = "brush"
+        printf("Hi")
 
     def paint(self, event):
         x1, y1 = (event.x - 2), (event.y - 2)
@@ -111,3 +113,4 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = ImageEditor(root)
     root.mainloop()
+
