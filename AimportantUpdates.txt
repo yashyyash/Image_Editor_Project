@@ -1,0 +1,28 @@
+update!! 
+
+Gui trial code has been generated using Pyqt5. 
+this a better approach! to use! 
+
+**imageEditor.png has basic gui design try to replicate that in Pyqt5**
+
+conda install pyqt
+conda install -c conda-forge pyqt5-tools
+On Windows, you might need to navigate to the Library\bin directory of your Conda environment and run designer.exe.
+
+5. Convert .ui File to Python Code
+Once your design is ready, convert the .ui file to a Python script with the following command:
+pyuic5 -x yourfile.ui -o yourfile.py
+
+6. Run the Python Script
+You can now run the generated Python script to see your GUI in action:
+
+python yourfile.py
+This setup within a Conda environment should make it straightforward to start building and experimenting with PyQt GUIs.
+
+
+
+
+pyqt5--->Editordraft1.ui------>gui1.py
+
+make a gui similar to *ImageEditorIdea.png in folder*
+---------------------------------------------------------------------edit 1 yash

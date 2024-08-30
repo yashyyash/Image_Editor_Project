@@ -45,23 +45,29 @@ class ImageEditor:
         self.brush_color = "black"
         self.canvas.bind("<B1-Motion>", self.paint)
 
-        # Buttons
-        button_frame_bottom = tk.Frame(self.root, bg="white")
-        button_frame_bottom.pack(side="bottom", pady=10)
+        # Drawer Frame for the right side buttons
+        self.drawer_frame = tk.Frame(self.root, bg="#551a8b", width=150)
+        self.drawer_frame.pack(side="right", fill="y")
 
-        open_button = tk.Button(button_frame_bottom, text="Open Image", command=self.open_image)
-        open_button.pack(side="left", padx=5)
+        # Buttons in the drawer
+        open_button = tk.Button(self.drawer_frame, text="Open Image", command=self.open_image, bg="white", fg="#551a8b")
+        open_button.pack(fill="x", padx=5, pady=5)
 
-        save_button = tk.Button(button_frame_bottom, text="Save Image", command=self.save_image)
-        save_button.pack(side="left", padx=5)
+        save_button = tk.Button(self.drawer_frame, text="Save Image", command=self.save_image, bg="white", fg="#551a8b")
+        save_button.pack(fill="x", padx=5, pady=5)
 
-        color_button = tk.Button(button_frame_bottom, text="Pick Color", command=self.pick_color)
-        color_button.pack(side="left", padx=5)
+        color_button = tk.Button(self.drawer_frame, text="Pick Color", command=self.pick_color, bg="white", fg="#551a8b")
+        color_button.pack(fill="x", padx=5, pady=5)
 
-        brush_button = tk.Button(button_frame_bottom, text="Brush", command=self.select_brush)
-        brush_button.pack(side="left", padx=5)
+        brush_button = tk.Button(self.drawer_frame, text="Brush", command=self.select_brush, bg="white", fg="#551a8b")
+        brush_button.pack(fill="x", padx=5, pady=5)
+
+        # Toggle Drawer Button
+        self.toggle_drawer_button = tk.Button(self.root, text="open drawer", command=self.toggle_drawer, bg="#551a8b", fg="white", bd=0, padx=10)
+        self.toggle_drawer_button.place(x=1650, y=50)
 
         self.is_maximized = False
+        self.drawer_open = True
 
     def minimize_window(self):
         self.root.withdraw()  # Hide the window
@@ -77,13 +83,22 @@ class ImageEditor:
     def move_window(self, event):
         self.root.geometry(f'+{event.x_root}+{event.y_root}')
 
+    def toggle_drawer(self):
+        if self.drawer_open:
+            self.drawer_frame.pack_forget()
+            self.toggle_drawer_button.config(text="<")
+            self.drawer_open = False
+        else:
+            self.drawer_frame.pack(side="right", fill="y")
+            self.toggle_drawer_button.config(text=">")
+            self.drawer_open = True
+
     def open_image(self):
         file_path = filedialog.askopenfilename()
         if file_path:
             self.image = Image.open(file_path)
             self.img_draw = ImageDraw.Draw(self.image)
             self.update_canvas()
-            
 
     def save_image(self):
         file_path = filedialog.asksaveasfilename(defaultextension=".png")
@@ -96,7 +111,6 @@ class ImageEditor:
 
     def select_brush(self):
         self.tool = "brush"
-        printf("Hi")
 
     def paint(self, event):
         x1, y1 = (event.x - 2), (event.y - 2)
@@ -113,4 +127,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = ImageEditor(root)
     root.mainloop()
-
